@@ -5187,11 +5187,14 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_bootstrap__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
+/* harmony import */ var _create__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create */ "./resources/js/create.js");
+/* harmony import */ var _create__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_create__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
 
 
-window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"];
-alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"].start();
+
+window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_2__["default"];
+alpinejs__WEBPACK_IMPORTED_MODULE_2__["default"].start();
 
 /***/ }),
 
@@ -5228,6 +5231,53 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/create.js":
+/*!********************************!*\
+  !*** ./resources/js/create.js ***!
+  \********************************/
+/***/ (() => {
+
+if (location.pathname.startsWith("/create")) {
+  var app = {
+    data: function data() {
+      return {
+        searchText: '',
+        searchResultList: [],
+        selectedMovie: {},
+        selectedFlag: false
+      };
+    },
+    methods: {
+      search: function search() {
+        var _this = this;
+        axios.get('https://api.themoviedb.org/3/search/movie?api_key=8a22ccaf72d02a8af20469c4924ac7a7&language=ja-JA&page=1&query=' + this.searchText).then(function (response) {
+          console.log(response.data.results);
+          _this.setSearchResult(response.data.results);
+        })["catch"](function (err) {
+          console.log('err:', err);
+        });
+      },
+      setSearchResult: function setSearchResult(results) {
+        this.searchResultList = results;
+      },
+      selectCandidate: function selectCandidate(index) {
+        this.selectedMovie = this.searchResultList[index];
+        this.selectedMovie.poster_path = "https://image.tmdb.org/t/p/w300_and_h450_bestv2/" + this.selectedMovie.poster_path;
+        this.searchResultList = [];
+        this.searchText = "";
+        this.selectedFlag = true;
+      },
+      removeMovie: function removeMovie() {
+        this.selectedMovie = {};
+        this.selectedFlag = false;
+      }
+    }
+  };
+  Vue.createApp(app).mount('#createForm');
+}
 
 /***/ }),
 

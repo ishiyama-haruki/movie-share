@@ -17,6 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/create', 'App\Http\Controllers\MovieHistoryController@create');
+Route::post('/save', 'App\Http\Controllers\MovieHistoryController@save');
+Route::get('/user/{id}', 'App\Http\Controllers\UserController@detail')->name('profile');
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
