@@ -17,7 +17,7 @@ class CreateMoviesTable extends Migration
             $table->id();
             $table->string('title');
             $table->foreignId('category_id');
-            $table->dateTime('release_date');
+            $table->date('release_date');
             $table->text('overview');
             $table->string('img_path');
             $table->timestamps();

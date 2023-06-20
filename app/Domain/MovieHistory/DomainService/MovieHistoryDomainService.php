@@ -26,4 +26,19 @@ final class MovieHistoryDomainService
         return $this->movieHistoryRepo->getMovieHistoriesFromUserId($userId);
     }
 
+    public function getHistoryFromId($id)
+    {
+        return $this->movieHistoryRepo->getHistoryFromId($id);
+    }
+
+    public function updateMovieHistory($id, $params)
+    {
+        return $this->movieHistoryRepo->updateMovieHistory($id, $params);
+    }
+
+    public function deleteMovieHistory($id)
+    {
+        return $this->movieHistoryRepo->deleteMovieHistory($id);
+    }
+
 }

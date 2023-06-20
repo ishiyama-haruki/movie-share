@@ -15,6 +15,15 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('profile', ['id' => Auth::id()])" :active="request()->routeIs('profile')">
+                        {{ __('マイページ') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('historyCreate')" :active="request()->routeIs('historyCreate')">
+                        {{ __('履歴登録') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('movieIndex')" :active="request()->routeIs('movieIndex')">
+                        {{ __('映画一覧') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -41,7 +50,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('ログアウト') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>

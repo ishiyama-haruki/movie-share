@@ -26,4 +26,14 @@ final class MovieDomainService
         return $this->movieRepo->storeMovie($params);
     }
 
+    public function getMovies()
+    {
+        return $this->movieRepo->getMovies();
+    }
+
+    public function getMovieFromId($id)
+    {
+        return $this->movieRepo->getMovieFromId($id);
+    }
+
 }

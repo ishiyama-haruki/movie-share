@@ -17,9 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/create', 'App\Http\Controllers\MovieHistoryController@create');
+Route::get('/create', 'App\Http\Controllers\MovieHistoryController@create')->name('historyCreate');
 Route::post('/save', 'App\Http\Controllers\MovieHistoryController@save');
 Route::get('/user/{id}', 'App\Http\Controllers\UserController@detail')->name('profile');
+Route::get('/movieHistory/{id}', 'App\Http\Controllers\MovieHistoryController@detail')->name('historyDetail');
+Route::post('/movieHistory/{id}/update', 'App\Http\Controllers\MovieHistoryController@update')->name('historyUpdate');
+Route::get('/movieHistory/{id}/delete', 'App\Http\Controllers\MovieHistoryController@delete')->name('historyDelete');
+Route::get('/movie', 'App\Http\Controllers\MovieController@index')->name('movieIndex');
+Route::get('/movie/{id}', 'App\Http\Controllers\MovieController@detail')->name('movieDetail');
 
 
 Route::get('/dashboard', function () {

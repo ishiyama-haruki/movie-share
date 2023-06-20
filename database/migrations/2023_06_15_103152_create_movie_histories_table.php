@@ -17,7 +17,7 @@ class CreateMovieHistoriesTable extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('movie_id');
-            $table->dateTime('viewing_date');
+            $table->date('viewing_date');
             $table->integer('evaluation');
             $table->string('place');
             $table->text('impression');
