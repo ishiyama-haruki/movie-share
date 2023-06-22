@@ -5189,12 +5189,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_bootstrap__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _create__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create */ "./resources/js/create.js");
 /* harmony import */ var _create__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_create__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
+/* harmony import */ var _detail__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./detail */ "./resources/js/detail.js");
+/* harmony import */ var _detail__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_detail__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
 
 
 
-window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_2__["default"];
-alpinejs__WEBPACK_IMPORTED_MODULE_2__["default"].start();
+
+window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_3__["default"];
+alpinejs__WEBPACK_IMPORTED_MODULE_3__["default"].start();
 
 /***/ }),
 
@@ -5277,6 +5280,32 @@ if (location.pathname.startsWith("/create")) {
     }
   };
   Vue.createApp(app).mount('#createForm');
+}
+
+/***/ }),
+
+/***/ "./resources/js/detail.js":
+/*!********************************!*\
+  !*** ./resources/js/detail.js ***!
+  \********************************/
+/***/ (() => {
+
+if (location.pathname.startsWith("/user")) {
+  var app = {
+    data: function data() {
+      return {
+        historyFlag: true,
+        interestFlag: false
+      };
+    },
+    methods: {
+      pushTab: function pushTab() {
+        this.historyFlag = !this.historyFlag;
+        this.interestFlag = !this.interestFlag;
+      }
+    }
+  };
+  Vue.createApp(app).mount('#userDetail');
 }
 
 /***/ }),

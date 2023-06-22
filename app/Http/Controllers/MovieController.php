@@ -3,17 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Domain\Movie\DomainService\MovieDomainService;
+use App\Domain\Interest\DomainService\InterestDomainService;
 
 class MovieController extends Controller
 {
     private MovieDomainService $movieDomainservice;
+    private InterestDomainService $interestDomainservice;
+
 
     public function __construct(
-        MovieDomainService $movieDomainservice
+        MovieDomainService $movieDomainservice,
+        InterestDomainService $interestDomainservice
     ) {
         $this->movieDomainservice = $movieDomainservice;
+        $this->interestDomainservice = $interestDomainservice;
     }
 
     public function index()
@@ -27,6 +33,23 @@ class MovieController extends Controller
     {
         $movie = $this->movieDomainservice->getMovieFromId($id);
 
-        return view('movie.detail', ['movie' => $movie]);
+        $params = [
+            'movie_id' => $id,
+            'user_id' => Auth::id()
+        ];
+        $interestId = $this->interestDomainservice->existInterest($params);
+
+        return view('movie.detail', ['movie' => $movie, 'interestId' => $interestId]);
+    }
+
+    public function interest(int $id)
+    {
+        $params = [
+            'movie_id' => $id,
+            'user_id' => Auth::id()
+        ];
+        $this->interestDomainservice->storeInterest($params);
+
+        return redirect()->route('movieDetail', ['id' => $id])->with('flash_message', '気になるリストに追加しました！');
     }
 }

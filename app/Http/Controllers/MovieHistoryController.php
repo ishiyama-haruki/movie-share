@@ -10,18 +10,22 @@ use \App\Http\Requests\UpdateMovieHistoryRequest;
 
 use App\Domain\Movie\DomainService\MovieDomainService;
 use App\Domain\MovieHistory\DomainService\MovieHistoryDomainService;
+use App\Domain\Interest\DomainService\InterestDomainService;
 
 class MovieHistoryController extends Controller
 {
     private MovieDomainService $movieDomainservice;
     private MovieHistoryDomainService $movieHistoryDomainservice;
+    private InterestDomainService $interestDomainservice;
 
     public function __construct(
         MovieDomainService $movieDomainservice,
-        MovieHistoryDomainService $movieHistoryDomainservice
+        MovieHistoryDomainService $movieHistoryDomainservice,
+        InterestDomainService $interestDomainservice
     ) {
         $this->movieDomainservice = $movieDomainservice;
         $this->movieHistoryDomainservice = $movieHistoryDomainservice;
+        $this->interestDomainservice = $interestDomainservice;
     }
     
     public function create()
@@ -39,6 +43,9 @@ class MovieHistoryController extends Controller
         
         $params['movie_id'] = $movieId;
         $params['user_id'] = $userId;
+
+        $this->interestDomainservice->deleteExistInterest($params);
+        
         $this->movieHistoryDomainservice->storeMovieHistory($params);
 
         return redirect()->route('profile', ['id' => $userId]);

@@ -25,6 +25,8 @@ Route::post('/movieHistory/{id}/update', 'App\Http\Controllers\MovieHistoryContr
 Route::get('/movieHistory/{id}/delete', 'App\Http\Controllers\MovieHistoryController@delete')->name('historyDelete');
 Route::get('/movie', 'App\Http\Controllers\MovieController@index')->name('movieIndex');
 Route::get('/movie/{id}', 'App\Http\Controllers\MovieController@detail')->name('movieDetail');
+Route::get('/movie/{id}/interest', 'App\Http\Controllers\MovieController@interest')->name('storeInterest');
+Route::get('/interest/{id}/remove', 'App\Http\Controllers\InterestController@remove')->name('removeInterest');
 
 
 Route::get('/dashboard', function () {
