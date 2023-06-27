@@ -29,6 +29,14 @@ class MovieController extends Controller
         return view('movie.index', ['movies' => $movies]);
     }
 
+    public function search(Request $request)
+    {
+        $params = $request->all();
+        $movies = $this->movieDomainservice->searchMovies($params);
+        
+        return view('movie.index', ['movies' => $movies]);
+    }
+
     public function detail(int $id)
     {
         $movie = $this->movieDomainservice->getMovieFromId($id);

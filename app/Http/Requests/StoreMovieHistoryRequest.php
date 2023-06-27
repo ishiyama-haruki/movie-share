@@ -25,6 +25,7 @@ class StoreMovieHistoryRequest extends FormRequest
     {
         return [
             'title' => 'required|max:255',
+            'original_title' => 'required|max:255',
             'evaluation' => 'required',
             'viewing_date' => 'required',
             'place' => 'required',
@@ -32,6 +33,7 @@ class StoreMovieHistoryRequest extends FormRequest
             'overview' => 'required',
             'release_date' => 'required',
             'img_path' => 'required',
+            'youtube_id' => 'nullable',
         ];
     }
 }

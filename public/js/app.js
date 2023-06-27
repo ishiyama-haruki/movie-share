@@ -5256,7 +5256,8 @@ if (location.pathname.startsWith("/create")) {
     methods: {
       search: function search() {
         var _this = this;
-        axios.get('https://api.themoviedb.org/3/search/movie?api_key=8a22ccaf72d02a8af20469c4924ac7a7&language=ja-JA&page=1&query=' + this.searchText).then(function (response) {
+        var api_key = "8a22ccaf72d02a8af20469c4924ac7a7";
+        axios.get('https://api.themoviedb.org/3/search/movie?api_key=' + api_key + '&language=ja-JA&page=1&query=' + this.searchText).then(function (response) {
           console.log(response.data.results);
           _this.setSearchResult(response.data.results);
         })["catch"](function (err) {
@@ -5272,10 +5273,28 @@ if (location.pathname.startsWith("/create")) {
         this.searchResultList = [];
         this.searchText = "";
         this.selectedFlag = true;
+        this.setYoutubeId();
       },
       removeMovie: function removeMovie() {
         this.selectedMovie = {};
         this.selectedFlag = false;
+      },
+      setYoutubeId: function setYoutubeId() {
+        var _this2 = this;
+        axios.get('https://www.googleapis.com/youtube/v3/search', {
+          params: {
+            q: this.selectedMovie.title + '　予告編',
+            type: 'video',
+            part: 'snippet',
+            maxResults: 1,
+            key: "AIzaSyDbb2iPln3QtPmYsfKZDkNX-QkXby45e_A"
+          }
+        }).then(function (response) {
+          var movie = response.data.items[0];
+          _this2.selectedMovie.youtubeId = movie.id.videoId;
+        })["catch"](function (err) {
+          console.log('err:', err);
+        });
       }
     }
   };

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \App\Http\Requests\UpdateUserRequest;
 
 use App\Domain\User\DomainService\UserDomainService;
 use App\Domain\MovieHistory\DomainService\MovieHistoryDomainService;
@@ -31,5 +32,13 @@ class UserController extends Controller
         $interests = $this->interestDomainservice->getInterestsFromUserId($id);
 
         return view('user.detail', ['user' => $user, 'movieHistories' => $movieHistories, 'interests' => $interests]);
+    }
+
+    public function update(int $id, UpdateUserRequest $request)
+    {
+        $params = $request->validated();
+        $this->userDomainservice->updateUser($id, $params);
+
+        return redirect()->route('profile', ['id' => $id])->with('flash_message', 'プロフィール更新したよ!');
     }
 }

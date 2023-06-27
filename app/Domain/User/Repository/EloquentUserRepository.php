@@ -18,4 +18,12 @@ class EloquentUserRepository
     {
         return $this->eloquentUser->findOrFail($id);
     }
+
+    public function updateUser($id, $params)
+    {
+        $user = $this->eloquentUser->findOrFail($id);
+        $user->fill($params)->save();
+
+        return $id;
+    }
 }

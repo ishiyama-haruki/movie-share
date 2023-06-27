@@ -5,12 +5,13 @@ if (location.pathname.startsWith("/create")) {
                 searchText: '',
                 searchResultList: [],
                 selectedMovie: {},
-                selectedFlag: false
+                selectedFlag: false,
             }
         },
         methods: {
             search: function() {
-                axios.get('https://api.themoviedb.org/3/search/movie?api_key=8a22ccaf72d02a8af20469c4924ac7a7&language=ja-JA&page=1&query='+this.searchText)
+                const api_key = process.env.MIX_TMDB_API_KEY
+                axios.get('https://api.themoviedb.org/3/search/movie?api_key=' + api_key + '&language=ja-JA&page=1&query='+this.searchText)
                 .then(response => {
                     console.log(response.data.results)
                     this.setSearchResult(response.data.results)
@@ -27,10 +28,28 @@ if (location.pathname.startsWith("/create")) {
                 this.searchResultList = []
                 this.searchText = ""
                 this.selectedFlag = true
+                this.setYoutubeId()
             },
             removeMovie: function() {
                 this.selectedMovie = {}
                 this.selectedFlag = false
+            },
+            setYoutubeId: function() {
+                axios.get('https://www.googleapis.com/youtube/v3/search', {
+                    params: {
+                        q: this.selectedMovie.title + '　予告編',
+                        type: 'video',
+                        part: 'snippet',
+                        maxResults: 1,
+                        key: process.env.MIX_YOUTUBE_API_KEY
+                    }
+                })
+                .then(response => {
+                    let movie = response.data.items[0];
+                    this.selectedMovie.youtubeId = movie.id.videoId
+                }).catch(err => {
+                    console.log('err:', err)
+                });
             }
         }
        

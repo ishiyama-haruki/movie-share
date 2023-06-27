@@ -18,7 +18,7 @@
                     <x-nav-link :href="route('historyCreate')" :active="request()->routeIs('historyCreate')">
                         {{ __('履歴登録') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('movieIndex')" :active="request()->routeIs('movieIndex')">
+                    <x-nav-link :href="route('movieIndex')" :active="request()->routeIs('movieIndex') or request()->routeIs('movieSearch')">
                         {{ __('映画一覧') }}
                     </x-nav-link>
                 </div>

@@ -20,4 +20,9 @@ final class UserDomainService
     {
         return $this->userRepo->getUserFromId($id);
     }
+
+    public function updateUser($id, $params)
+    {
+        return $this->userRepo->updateUser($id, $params);
+    }
 }

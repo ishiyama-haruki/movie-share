@@ -4,7 +4,7 @@
             {{ __('履歴登録') }}
         </h2>
     </x-slot>
-    <form id="createForm" method="POST" action="{{ url('/save')}}" class="w-3/4 mx-auto mt-4"> 
+    <form id="createForm" method="POST" action="{{ url('/save')}}" ref="form" class="w-3/4 mx-auto mt-4"> 
         {{ csrf_field() }}
         <div class="relative w-3/4 mx-auto">
             <input type="search" v-model="searchText" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-100 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search">
@@ -29,7 +29,7 @@
                 </ul>
             </div>
         @endif
-        <div v-show="selectedFlag" class="w-full mx-auto mt-4 flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+        <div v-show="selectedFlag" class="w-full mx-auto mt-4 flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row">
             <img class="object-cover w-full rounded-t-lg h-96 md:h-full md:w-auto md:rounded-none md:rounded-l-lg" :src="selectedMovie.poster_path" alt="">
             <div class="flex flex-col justify-between p-4 leading-normal">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">@{{ selectedMovie.title }}</h5>
@@ -75,9 +75,11 @@
             </div>
         </div>
         <input type="hidden" name="title" :value="selectedMovie.title">
+        <input type="hidden" name="original_title" :value="selectedMovie.original_title">
         <input type="hidden" name="overview" :value="selectedMovie.overview">
         <input type="hidden" name="release_date" :value="selectedMovie.release_date">
         <input type="hidden" name="img_path" :value="selectedMovie.poster_path">
+        <input type="hidden" name="youtube_id" :value="selectedMovie.youtubeId">
     </form>
     
 </x-app-layout>
