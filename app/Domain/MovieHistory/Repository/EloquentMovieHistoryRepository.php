@@ -29,6 +29,17 @@ class EloquentMovieHistoryRepository
         return $movieHistories;
     }
 
+    public function getMovieTitlesFromUserId($userId)
+    {
+        $movieHistories = $this->eloquentMovieHistory->where('user_id', $userId)->get();
+
+        $movieTitles = [];
+        foreach ($movieHistories as $movieHistory) {
+            $movieTitles[] = $movieHistory->movie->title;
+        }
+        return $movieTitles;
+    }
+
     public function getHistoryFromId($id)
     {
         return $this->eloquentMovieHistory->findOrFail($id);

@@ -28,6 +28,7 @@ class UpdateMovieHistoryRequest extends FormRequest
             'viewing_date' => 'required',
             'place' => 'required',
             'impression' => 'required',
+            'accessible' => 'required'
         ];
     }
 }

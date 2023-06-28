@@ -26,7 +26,8 @@ class MovieHistory extends Model
         'evaluation',
         'place',
         'impression',
-        'viewing_count'
+        'viewing_count',
+        'accessible'
     ];
 
     protected $guarded = ['created_at', 'updated_at'];

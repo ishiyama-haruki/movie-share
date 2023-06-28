@@ -20,7 +20,7 @@ class CreateMoviesTable extends Migration
             $table->foreignId('category_id');
             $table->date('release_date');
             $table->text('overview');
-            $table->string('img_path');
+            $table->string('img_path')->nullable();
             $table->string('youtube_id')->nullable();
             $table->timestamps();
         });

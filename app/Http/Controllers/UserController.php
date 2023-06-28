@@ -41,4 +41,10 @@ class UserController extends Controller
 
         return redirect()->route('profile', ['id' => $id])->with('flash_message', 'プロフィール更新したよ!');
     }
+
+    public function getHistory(int $id)
+    {
+        $response = $this->movieHistoryDomainservice->getMovieTitlesFromUserId($id);
+        return $response;
+    }
 }

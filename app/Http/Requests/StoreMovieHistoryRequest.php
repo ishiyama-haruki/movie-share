@@ -28,12 +28,14 @@ class StoreMovieHistoryRequest extends FormRequest
             'original_title' => 'required|max:255',
             'evaluation' => 'required',
             'viewing_date' => 'required',
+            'accessible' => 'required',
             'place' => 'required',
             'impression' => 'required',
             'overview' => 'required',
             'release_date' => 'required',
-            'img_path' => 'required',
+            'img_path' => 'nullable',
             'youtube_id' => 'nullable',
         ];
     }
+
 }

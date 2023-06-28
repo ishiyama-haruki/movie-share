@@ -22,8 +22,9 @@ class CreateMovieHistoriesTable extends Migration
             $table->string('place');
             $table->text('impression');
             $table->integer('viewing_count')->default(1);
-            
+            $table->boolean('accessible')->default(1);
             $table->timestamps();
+            $table->unique(['user_id', 'movie_id']);
         });
     }
 

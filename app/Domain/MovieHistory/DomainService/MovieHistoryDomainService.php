@@ -26,6 +26,11 @@ final class MovieHistoryDomainService
         return $this->movieHistoryRepo->getMovieHistoriesFromUserId($userId);
     }
 
+    public function getMovieTitlesFromUserId($userId)
+    {
+        return $this->movieHistoryRepo->getMovieTitlesFromUserId($userId);
+    }
+
     public function getHistoryFromId($id)
     {
         return $this->movieHistoryRepo->getHistoryFromId($id);

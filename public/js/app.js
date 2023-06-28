@@ -5247,19 +5247,39 @@ if (location.pathname.startsWith("/create")) {
   var app = {
     data: function data() {
       return {
+        userId: null,
+        userHistory: [],
         searchText: '',
         searchResultList: [],
         selectedMovie: {},
-        selectedFlag: false
+        searchFlag: false,
+        selectedFlag: false,
+        existFlag: false
       };
     },
+    mounted: function mounted() {
+      this.userId = document.getElementById('userId').value;
+      this.getUserHistory();
+    },
     methods: {
-      search: function search() {
+      getUserHistory: function getUserHistory() {
         var _this = this;
+        axios.get("/api/user/" + this.userId).then(function (response) {
+          _this.userHistory = response.data;
+        })["catch"](function (err) {
+          console.log('err:', err);
+        });
+      },
+      search: function search() {
+        var _this2 = this;
+        this.existFlag = false;
+        setTimeout(function () {
+          this.searchFlag = true;
+        }, 10000);
         var api_key = "8a22ccaf72d02a8af20469c4924ac7a7";
         axios.get('https://api.themoviedb.org/3/search/movie?api_key=' + api_key + '&language=ja-JA&page=1&query=' + this.searchText).then(function (response) {
           console.log(response.data.results);
-          _this.setSearchResult(response.data.results);
+          _this2.setSearchResult(response.data.results);
         })["catch"](function (err) {
           console.log('err:', err);
         });
@@ -5269,18 +5289,25 @@ if (location.pathname.startsWith("/create")) {
       },
       selectCandidate: function selectCandidate(index) {
         this.selectedMovie = this.searchResultList[index];
-        this.selectedMovie.poster_path = "https://image.tmdb.org/t/p/w300_and_h450_bestv2/" + this.selectedMovie.poster_path;
+        if (this.userHistory.includes(this.selectedMovie.title)) {
+          this.existFlag = true;
+        }
+        if (this.selectedMovie.poster_path) {
+          this.selectedMovie.poster_path = "https://image.tmdb.org/t/p/w300_and_h450_bestv2/" + this.selectedMovie.poster_path;
+        }
         this.searchResultList = [];
         this.searchText = "";
+        this.searchFlag = false;
         this.selectedFlag = true;
         this.setYoutubeId();
       },
       removeMovie: function removeMovie() {
         this.selectedMovie = {};
         this.selectedFlag = false;
+        this.existFlag = false;
       },
       setYoutubeId: function setYoutubeId() {
-        var _this2 = this;
+        var _this3 = this;
         axios.get('https://www.googleapis.com/youtube/v3/search', {
           params: {
             q: this.selectedMovie.title + '　予告編',
@@ -5291,10 +5318,13 @@ if (location.pathname.startsWith("/create")) {
           }
         }).then(function (response) {
           var movie = response.data.items[0];
-          _this2.selectedMovie.youtubeId = movie.id.videoId;
+          _this3.selectedMovie.youtubeId = movie.id.videoId;
         })["catch"](function (err) {
           console.log('err:', err);
         });
+      },
+      submit: function submit() {
+        document.getElementById('createForm').submit();
       }
     }
   };
