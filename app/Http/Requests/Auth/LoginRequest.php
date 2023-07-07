@@ -34,6 +34,21 @@ class LoginRequest extends FormRequest
         ];
     }
 
+    public function messages()
+    {
+        return [
+            'name.required' => 'ユーザー名を入力してください',
+            'name.unique' => 'このユーザー名はすでに使用されています',
+            'name.max' => 'ユーザー名は10文字以下で入力してください',
+            'email.required' => 'メールアドレスを入力してください',
+            'email.email' => 'メールアドレスの形式が不適切です',
+            'email.unique' => 'このメールアドレスはすでに使用されています',
+            'password.required' => 'パスワードを入力してください',
+            'password.unique' => 'このパスワードはすでに使用されています',
+            'password.confirmed' => '確認用パスワードが一致していません'
+        ];
+    }
+
     /**
      * Attempt to authenticate the request's credentials.
      *

@@ -5272,10 +5272,10 @@ if (location.pathname.startsWith("/create")) {
       },
       search: function search() {
         var _this2 = this;
+        this.selectedMovie = {};
+        this.selectedFlag = false;
         this.existFlag = false;
-        setTimeout(function () {
-          this.searchFlag = true;
-        }, 10000);
+        this.searchFlag = true;
         var api_key = "8a22ccaf72d02a8af20469c4924ac7a7";
         axios.get('https://api.themoviedb.org/3/search/movie?api_key=' + api_key + '&language=ja-JA&page=1&query=' + this.searchText).then(function (response) {
           console.log(response.data.results);
@@ -5310,7 +5310,7 @@ if (location.pathname.startsWith("/create")) {
         var _this3 = this;
         axios.get('https://www.googleapis.com/youtube/v3/search', {
           params: {
-            q: this.selectedMovie.title + '　予告編',
+            q: this.selectedMovie.title + +'　' + this.selectedMovie.release_date + '　予告編',
             type: 'video',
             part: 'snippet',
             maxResults: 1,

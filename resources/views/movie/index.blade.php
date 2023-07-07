@@ -11,7 +11,7 @@
         </form>
     </div>
     <h3 class="text-center text-3xl font-extrabold mt-10 mb-3">現在の登録動画数：{{ count($movies) }}</h3>
-    <div class="w-3/4 mx-auto my-5 p-3 bg-white overflow-y-auto 2xl:h-144 h-128">
+    <div class="w-3/4 mx-auto my-5 p-5 bg-white overflow-y-auto max-h-272">
         @if (session('flash_message'))
             <div class="mb-5 text-blue-600 text-center">
                 {{ session('flash_message') }}
@@ -24,7 +24,7 @@
         @endif
         <div class="card bg-white">
             <table class="w-full text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-500">
+                <thead class="text-gray-700 bg-gray-200 dark:bg-gray-700 dark:text-gray-500">
                     <tr>
                         <th scope="col" class="leading-10"></th>
                         <th scope="col" class="leading-10">タイトル</th>

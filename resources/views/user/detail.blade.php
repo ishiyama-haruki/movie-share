@@ -4,22 +4,21 @@
             {{ __('プロフィール') }}
         </h2>
     </x-slot>
-    <div id="userDetail" class="2xl:w-3/4 w-4/5 mx-auto my-10 p-5 bg-white">
+    <div>
         @if (session('flash_message'))
-            <div class="text-blue-600 text-center">
+            <div class="text-blue-600 text-center mt-5">
                 {{ session('flash_message') }}
             </div>
         @endif
         @if ($errors->any())
-            <div>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li class="alert alert-danger text-center">{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+            <ul class="mt-5">
+                @foreach ($errors->all() as $error)
+                    <li class="text-red-600 text-center">{{ $error }}</li>
+                @endforeach
+            </ul>
         @endif
-
+    </div>
+    <div id="userDetail" class="2xl:w-3/4 w-4/5 mx-auto mt-5 p-5 bg-white">
         @if (Auth::id() == $user->id)
             <form action="{{ route('profileUpdate', ['id' => $user->id]) }}" method="post" class="mb-8 ml-3">
                 {{ csrf_field() }}
@@ -52,16 +51,16 @@
             <div class="card-header">
             <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
                 <li class="mr-2">
-                    <span @click="pushTab" :class="[historyFlag ? 'text-blue-600 bg-gray-100 dark:text-blue-500':'hover:text-gray-600 hover:bg-gray-50 dark:hover:text-gray-300']" class="cursor-pointer inline-block p-4 rounded-t-lg active dark:bg-gray-800">視聴履歴</span>
+                    <span @click="pushTab" :class="[historyFlag ? 'text-blue-600 bg-gray-200 dark:text-blue-500':'hover:text-gray-600 hover:bg-gray-100 dark:hover:text-gray-300']" class="cursor-pointer inline-block p-4 rounded-t-lg active dark:bg-gray-800">視聴履歴({{count($movieHistories)}}件)</span>
                 </li>
                 <li class="mr-2">
-                    <span @click="pushTab" :class="[interestFlag ? 'text-blue-600 bg-gray-100 dark:text-blue-500':'hover:text-gray-600 hover:bg-gray-50 dark:hover:text-gray-300']" class="cursor-pointer inline-block p-4 rounded-t-lg dark:hover:bg-gray-800">気になるリスト</span>
+                    <span @click="pushTab" :class="[interestFlag ? 'text-blue-600 bg-gray-200 dark:text-blue-500':'hover:text-gray-600 hover:bg-gray-100 dark:hover:text-gray-300']" class="cursor-pointer inline-block p-4 rounded-t-lg dark:hover:bg-gray-800">気になるリスト({{count($interests)}}件)</span>
                 </li>
             </ul>
             </div>
-            <div class="card-body overflow-y-auto 2xl:h-128 h-96">
+            <div class="card-body overflow-y-auto max-h-272">
                 <table class="w-full text-left text-gray-500 dark:text-gray-400" v-show="historyFlag">
-                    <thead class="text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <thead class="text-gray-700 bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="leading-10"></th>
                             <th scope="col" class="leading-10">タイトル</th>
@@ -111,7 +110,7 @@
                     </tbody>
                 </table>
                 <table class="w-full text-left text-gray-500 dark:text-gray-400" v-show="interestFlag">
-                    <thead class="text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <thead class="text-gray-700 bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="leading-10"></th>
                             <th scope="col" class="leading-10">タイトル</th>

@@ -11,9 +11,9 @@ class Evaluation extends Component
      *
      * @return void
      */
-    public int $evaluation;
+    public $evaluation;
 
-    public function __construct(int $evaluation)
+    public function __construct ($evaluation)
     {
         $this->evaluation = $evaluation;
     }

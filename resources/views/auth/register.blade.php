@@ -14,7 +14,7 @@
 
             <!-- Name -->
             <div>
-                <x-label for="name" :value="__('名前')" />
+                <x-label for="name" :value="__('ユーザー名')" />
 
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
             </div>

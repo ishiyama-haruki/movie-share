@@ -8,29 +8,26 @@
         {{ csrf_field() }}
         <input id="userId" type="hidden" value="{{ Auth::id() }}">
         <div class="relative w-1/2 mx-auto">
-            <input type="search" v-model="searchText" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border-gray-100 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search">
+            <input type="search" v-model="searchText" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border-gray-100 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="映画タイトルを入力">
             <button type="button" @click="search" class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>
         </div>
-        <div v-show="selectedFlag" class="flex justify-center my-2">
+        <!-- <div v-show="selectedFlag" class="flex justify-center my-2">
             <button type="button" @click="removeMovie" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">映画を外す</button>
-        </div>
+        </div> -->
         <span class="text-center block my-5" v-show="searchFlag && searchResultList.length == 0">
             検索がヒットしませんでした。
         </span>
         <div v-show="searchResultList.length > 0" class=" w-1/2 mx-auto bg-white m-3 p-3 rounded-md">
             <ul class="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
                 <li v-for="(result, index) in searchResultList" @click="selectCandidate(index)" style="cursor: pointer">
-                    @{{ result.original_title }}
+                    @{{ result.original_title }}（@{{result.release_date}}）
                 </li>
             </ul>
         </div>
         @if ($errors->any())
             <div>
                 <ul>
-                    <!-- @foreach ($errors->all() as $error)
-                        <li class="alert alert-danger text-center">{{ $error }}</li>
-                    @endforeach -->
-                    <li class="alert alert-danger text-center">入力漏れがあります。</li>
+                    <li class="mt-2 text-red-600 text-center">入力内容に不備があります。</li>
                 </ul>
             </div>
         @endif
@@ -76,6 +73,7 @@
                             <option value="NetFlix">NetFlix</option>
                             <option value="Amazon Prime">Amazon Prime</option>
                             <option value="Fulu">Fulu</option>
+                            <option value="U-NEXT">U-NEXT</option>
                             <option value="Other">その他</option>
                         </select>
                     </div>
@@ -83,7 +81,7 @@
                 </div>
                 <div class="mb-3" v-show="!existFlag">
                     <label for="" class="block mt-2 text-sm font-medium text-gray-900 dark:text-white">感想</label>
-                    <textarea name="impression" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                    <textarea name="impression" rows="4" required class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
                 </div>
                 <div class="mt-2 flex justify-end" v-show="!existFlag">
                     <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">登録</button>

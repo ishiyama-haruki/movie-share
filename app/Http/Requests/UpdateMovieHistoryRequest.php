@@ -27,8 +27,19 @@ class UpdateMovieHistoryRequest extends FormRequest
             'evaluation' => 'required',
             'viewing_date' => 'required',
             'place' => 'required',
-            'impression' => 'required',
-            'accessible' => 'required'
+            'impression' => 'required|max:255',
+            'accessible' => 'required',
+            'viewing_count' => 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'viewing_date.required' => '視聴日は必ず入力してください',
+            'viewing_count.required' => '視聴回数は必ず入力してください',
+            'impression.required' => '感想は必ず入力してください',
+            'impression.max' => '感想は255文字以下で入力してください',
         ];
     }
 }

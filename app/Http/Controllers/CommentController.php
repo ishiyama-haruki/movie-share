@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreCommentRequest;
 
 use App\Domain\Comment\DomainService\CommentDomainService;
 
@@ -16,9 +17,9 @@ class CommentController extends Controller
         $this->commentDomainService = $commentDomainService;
     }
     
-    public function save(Request $request)
+    public function save(StoreCommentRequest $request)
     {
-        $params = $request->all();
+        $params = $request->validated();
         
         $this->commentDomainService->store($params);
 

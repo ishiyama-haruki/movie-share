@@ -36,7 +36,7 @@
             @endif
 
             <div style="display: flex; justify-content: center;">
-                <img src="{{ asset('img/helmet.png') }}" alt=""  style="width: 70%;">
+                <img src="{{ asset('img/movie_share_logo.png') }}" alt=""  style="width: 70%;">
             </div>
         </div>
     </body>

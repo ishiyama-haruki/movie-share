@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateUserRequest extends FormRequest
+class StoreCommentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,17 +24,17 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:10',
-            'comment' => 'nullable|max:255'
+            'user_id' => 'required',
+            'movie_history_id' => 'required',
+            'message' => 'required|max:255'
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => '名前を入力してください',
-            'name.max' => '名前は10文字以下で入力してください',
-            'comment.max' => '本文は255文字以下で入力してください',
+            'message.required' => 'コメント内容は必ず入力してください',
+            'message.max' => 'コメント内容は255文字以下で入力してください',
         ];
     }
 }
