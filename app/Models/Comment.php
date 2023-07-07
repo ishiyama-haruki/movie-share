@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MovieHistory extends Model
+class Comment extends Model
 {
     use HasFactory;
 
@@ -14,25 +14,15 @@ class MovieHistory extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function movie()
+    public function movieHistory()
     {
-        return $this->belongsTo(Movie::class);
-    }
-
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
+        return $this->belongsTo(MovieHistory::class);
     }
 
     protected $fillable = [
         'user_id',
-        'movie_id',
-        'viewing_date',
-        'evaluation',
-        'place',
-        'impression',
-        'viewing_count',
-        'accessible'
+        'movie_history_id',
+        'message'
     ];
 
     protected $guarded = ['created_at', 'updated_at'];

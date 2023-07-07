@@ -30,6 +30,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/movie/{id}', 'App\Http\Controllers\MovieController@detail')->name('movieDetail');
     Route::get('/movie/{id}/interest', 'App\Http\Controllers\MovieController@interest')->name('storeInterest');
     Route::get('/interest/{id}/remove', 'App\Http\Controllers\InterestController@remove')->name('removeInterest');
+    Route::post('/comment/save', 'App\Http\Controllers\CommentController@save')->name('commentStore');
+    Route::get('/comment/{id}/delete', 'App\Http\Controllers\CommentController@delete')->name('commentDelete');
   });
 
 require __DIR__.'/auth.php';

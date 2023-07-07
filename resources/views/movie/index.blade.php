@@ -4,10 +4,12 @@
             {{ __('映画一覧') }}
         </h2>
     </x-slot>
-    <form action="{{ route('movieSearch') }}" method="get" class="w-1/2 mt-5 mx-auto flex items-center">
-        <input type="text" name="title" class="w-1/2 mr-10 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="映画タイトル">
-        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">検索</button>
-    </form>
+    <div class="flex justify-center">
+        <form action="{{ route('movieSearch') }}" method="get" class="w-1/3 mt-5 mx-auto flex items-center">
+            <input type="text" name="title" class="w-1/2 mr-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="映画タイトル">
+            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">検索</button>
+        </form>
+    </div>
     <h3 class="text-center text-3xl font-extrabold mt-10 mb-3">現在の登録動画数：{{ count($movies) }}</h3>
     <div class="w-3/4 mx-auto my-5 p-3 bg-white overflow-y-auto 2xl:h-144 h-128">
         @if (session('flash_message'))
