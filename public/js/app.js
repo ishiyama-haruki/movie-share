@@ -5243,7 +5243,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
   \********************************/
 /***/ (() => {
 
-if (location.pathname.startsWith("/create")) {
+if (location.pathname.startsWith("/movieHistory") && location.pathname.endsWith("create")) {
   var app = {
     data: function data() {
       return {
@@ -5253,15 +5253,31 @@ if (location.pathname.startsWith("/create")) {
         searchResultList: [],
         selectedMovie: {},
         searchFlag: false,
-        selectedFlag: false,
-        existFlag: false
+        selectedFlag: false
       };
     },
     mounted: function mounted() {
       this.userId = document.getElementById('userId').value;
       this.getUserHistory();
+      this.setJsonData();
+    },
+    computed: {
+      existFlag: function existFlag() {
+        if (this.userHistory.includes(this.selectedMovie.title)) {
+          return true;
+        }
+        return false;
+      }
     },
     methods: {
+      setJsonData: function setJsonData() {
+        var json = document.getElementById('movieData').value;
+        if (json) {
+          this.selectedMovie = JSON.parse(json);
+          this.selectedMovie.poster_path = this.selectedMovie.img_path;
+          this.selectedFlag = true;
+        }
+      },
       getUserHistory: function getUserHistory() {
         var _this = this;
         axios.get("/api/user/" + this.userId).then(function (response) {
@@ -5274,7 +5290,6 @@ if (location.pathname.startsWith("/create")) {
         var _this2 = this;
         this.selectedMovie = {};
         this.selectedFlag = false;
-        this.existFlag = false;
         this.searchFlag = true;
         var api_key = "0308433a2c1eaf1187611eeebadb021f";
         axios.get('https://api.themoviedb.org/3/search/movie?api_key=' + api_key + '&language=ja-JA&page=1&query=' + this.searchText).then(function (response) {
@@ -5289,9 +5304,6 @@ if (location.pathname.startsWith("/create")) {
       },
       selectCandidate: function selectCandidate(index) {
         this.selectedMovie = this.searchResultList[index];
-        if (this.userHistory.includes(this.selectedMovie.title)) {
-          this.existFlag = true;
-        }
         if (this.selectedMovie.poster_path) {
           this.selectedMovie.poster_path = "https://image.tmdb.org/t/p/w300_and_h450_bestv2/" + this.selectedMovie.poster_path;
         }
@@ -5304,7 +5316,6 @@ if (location.pathname.startsWith("/create")) {
       removeMovie: function removeMovie() {
         this.selectedMovie = {};
         this.selectedFlag = false;
-        this.existFlag = false;
       },
       setYoutubeId: function setYoutubeId() {
         var _this3 = this;

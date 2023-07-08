@@ -16,7 +16,7 @@
                     <x-nav-link :href="route('profile', ['id' => Auth::id()])" :active="request()->is('user/' . Auth::id())">
                         {{ __('マイページ') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('historyCreate')" :active="request()->routeIs('historyCreate')">
+                    <x-nav-link :href="route('create')" :active="request()->routeIs('create') or request()->routeIs('createByMovie')">
                         {{ __('履歴登録') }}
                     </x-nav-link>
                     <x-nav-link :href="route('movieIndex')" :active="request()->routeIs('movieIndex') or request()->routeIs('movieSearch')">

@@ -30,7 +30,15 @@ class MovieHistoryController extends Controller
     
     public function create()
     {
-        return view('movie.create');
+        return view('movie.create', ['movie' => '']);
+    }
+
+    public function createByMovie($id)
+    {
+        $movie = $this->movieDomainservice->getMovieFromId($id);
+        $movieJson = $movie->toJson();
+        
+        return view('movie.create', ['movie' => $movieJson]);
     }
 
     public function save(StoreMovieHistoryRequest $request)

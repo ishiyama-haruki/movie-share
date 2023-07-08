@@ -38,6 +38,7 @@
                 </div>
                 <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $movie->overview }}</p>       
                 <div class="flex justify-end mt-2">
+                    <a href="{{ route('createByMovie', ['id' => $movie->id]) }}" class="mr-3 focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900">履歴登録する</a>
                     @if ($interestId)
                         <a href="{{ route('removeInterest', ['id' => $interestId]) }}" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">気になるから外す</a>
                     @else

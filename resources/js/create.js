@@ -1,4 +1,4 @@
-if (location.pathname.startsWith("/create")) {
+if (location.pathname.startsWith("/movieHistory") && location.pathname.endsWith("create")) {
     const app = {
         data() {
             return {
@@ -9,18 +9,37 @@ if (location.pathname.startsWith("/create")) {
                 selectedMovie: {},
                 searchFlag: false,
                 selectedFlag: false,
-                existFlag: false
             }
         },
         mounted: function () {
             this.userId = document.getElementById('userId').value;
             this.getUserHistory()
+
+            this.setJsonData()
+        },
+        computed: {
+            existFlag: function() {
+                if (this.userHistory.includes(this.selectedMovie.title)) {
+                    return true
+                }
+                return false
+            }
         },
         methods: {
+            setJsonData: function() {
+                let json = document.getElementById('movieData').value
+                if (json) {
+                    this.selectedMovie = JSON.parse(json)
+                    this.selectedMovie.poster_path = this.selectedMovie.img_path
+                    
+                    this.selectedFlag = true
+                }
+            },
             getUserHistory: function() {
                 axios.get("/api/user/" + this.userId)
                 .then(response => {
                     this.userHistory = response.data;
+                    
                 }).catch(err => {
                     console.log('err:', err)
                 });
@@ -28,7 +47,6 @@ if (location.pathname.startsWith("/create")) {
             search: function() {
                 this.selectedMovie = {}
                 this.selectedFlag = false
-                this.existFlag = false
                 
                 this.searchFlag = true;
 
@@ -47,11 +65,6 @@ if (location.pathname.startsWith("/create")) {
             selectCandidate: function(index) {
                 this.selectedMovie = this.searchResultList[index]
 
-
-                if (this.userHistory.includes(this.selectedMovie.title)) {
-                    this.existFlag = true;
-                }
-
                 if (this.selectedMovie.poster_path) {
                     this.selectedMovie.poster_path = "https://image.tmdb.org/t/p/w300_and_h450_bestv2/" + this.selectedMovie.poster_path
                 } 
@@ -65,7 +78,6 @@ if (location.pathname.startsWith("/create")) {
             removeMovie: function() {
                 this.selectedMovie = {}
                 this.selectedFlag = false
-                this.existFlag = false
             },
             setYoutubeId: function() {
                 axios.get('https://www.googleapis.com/youtube/v3/search', {

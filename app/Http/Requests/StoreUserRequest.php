@@ -28,7 +28,7 @@ class StoreUserRequest extends FormRequest
         return [
             'name' => 'required|max:10|unique:users',
             'email' => 'required|email|string|unique:users',
-            'password' => 'required|unique:users|confirmed|between:5,10',
+            'password' => 'required|confirmed|between:5,10',
         ];
     }
 
@@ -42,7 +42,7 @@ class StoreUserRequest extends FormRequest
             'email.email' => 'メールアドレスの形式が不適切です',
             'email.unique' => 'このメールアドレスはすでに使用されています',
             'password.required' => 'パスワードを入力してください',
-            'password.unique' => 'このパスワードはすでに使用されています',
+            // 'password.unique' => 'このパスワードはすでに使用されています',
             'password.between' => 'パスワードは5文字以上10文字以下で設定してください',
             'password.confirmed' => '確認用パスワードが一致していません'
         ];

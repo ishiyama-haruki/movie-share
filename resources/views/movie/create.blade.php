@@ -5,6 +5,7 @@
         </h2>
     </x-slot>
     <form id="createForm" method="POST" action="{{ url('/save')}}" class="w-3/4 mx-auto mt-4"> 
+        <input id="movieData" type="hidden" value="{{ $movie }}">
         {{ csrf_field() }}
         <input id="userId" type="hidden" value="{{ Auth::id() }}">
         <div class="relative w-1/2 mx-auto">
