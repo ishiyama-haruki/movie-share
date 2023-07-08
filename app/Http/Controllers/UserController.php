@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Http\Requests\UpdateUserRequest;
+use \App\Http\Requests\UpdateEmailRequest;
 
 use App\Domain\User\DomainService\UserDomainService;
 use App\Domain\MovieHistory\DomainService\MovieHistoryDomainService;
@@ -24,6 +25,11 @@ class UserController extends Controller
         $this->movieHistoryDomainservice = $movieHistoryDomainservice;
         $this->interestDomainservice = $interestDomainservice;
     }
+
+    public function emailReset()
+    {
+        return view('user.email-reset');
+    }
     
     public function detail($id)
     {
@@ -39,7 +45,15 @@ class UserController extends Controller
         $params = $request->validated();
         $this->userDomainservice->updateUser($id, $params);
 
-        return redirect()->route('profile', ['id' => $id])->with('flash_message', 'プロフィール更新したよ!');
+        return redirect()->route('profile', ['id' => $id])->with('flash_message', 'プロフィールを更新したよ!');
+    }
+
+    public function updateEmail(int $id, UpdateEmailRequest $request)
+    {
+        $params = $request->validated();
+        $this->userDomainservice->updateUser($id, $params);
+
+        return redirect()->route('profile', ['id' => $id])->with('flash_message', 'メールアドレスを更新したよ!');
     }
 
     public function getHistory(int $id)

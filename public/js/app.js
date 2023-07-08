@@ -5276,7 +5276,7 @@ if (location.pathname.startsWith("/create")) {
         this.selectedFlag = false;
         this.existFlag = false;
         this.searchFlag = true;
-        var api_key = "8a22ccaf72d02a8af20469c4924ac7a7";
+        var api_key = "0308433a2c1eaf1187611eeebadb021f";
         axios.get('https://api.themoviedb.org/3/search/movie?api_key=' + api_key + '&language=ja-JA&page=1&query=' + this.searchText).then(function (response) {
           console.log(response.data.results);
           _this2.setSearchResult(response.data.results);
@@ -5314,7 +5314,7 @@ if (location.pathname.startsWith("/create")) {
             type: 'video',
             part: 'snippet',
             maxResults: 1,
-            key: "AIzaSyDbb2iPln3QtPmYsfKZDkNX-QkXby45e_A"
+            key: "AIzaSyBplxDvRNwcqHMbFkDHOOGlSNJnmexM7UU"
           }
         }).then(function (response) {
           var movie = response.data.items[0];
