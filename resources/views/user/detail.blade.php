@@ -18,9 +18,9 @@
             </ul>
         @endif
     </div>
-    <div id="userDetail" class="2xl:w-3/4 w-4/5 mx-auto mt-5 p-5 bg-white">
+    <div id="userDetail" class="2xl:w-3/4 md:w-4/5 w-full mx-auto mt-5 md:p-5 py-5 bg-white">
         @if (Auth::id() == $user->id)
-            <form action="{{ route('profileUpdate', ['id' => $user->id]) }}" method="post" class="mb-8 ml-3">
+            <form action="{{ route('profileUpdate', ['id' => $user->id]) }}" method="post" class="mb-8 md:mx-0 mx-2">
                 {{ csrf_field() }}
                 <div class="flex items-center mb-2">
                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
@@ -39,8 +39,8 @@
                     ＊メールアドレスはパスワードリセットの際に必要となります。実在するメールアドレスを設定してください。
                     (<a href="{{ route('email') }}" class="text-blue-600 underline dark:text-blue-500 hover:no-underline">メールアドレス変更</a>)
                 </span>
-                <div class="flex items-end">
-                    <textarea name="comment" id="" cols="40" rows="3" value="{{ $user->comment }}" class="block p-2.5 w-1/2 mr-3 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">{{ $user->comment }}</textarea>
+                <div class="flex items-end w-full">
+                    <textarea name="comment" id="" cols="40" rows="3" value="{{ $user->comment }}" class="md:w-1/2 w-3/4 block p-2.5 mr-3 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">{{ $user->comment }}</textarea>
                     <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">更新</button>
                 </div>
             </form>
@@ -75,44 +75,50 @@
                         <tr>
                             <th scope="col" class="leading-10"></th>
                             <th scope="col" class="leading-10">タイトル</th>
-                            <th scope="col" class="leading-10" class="text-center">評価</th>
-                            <th scope="col" class="leading-10" class="text-center">視聴回数</th>
-                            <th scope="col" class="leading-10">感想</th>
+                            <th scope="col" class="leading-10 text-center">評価</th>
+                            <th scope="col" class="leading-10 text-center md:table-cell hidden">視聴回数</th>
+                            <th scope="col" class="leading-10 md:table-cell hidden">感想</th>
                             <th scope="col" class="leading-10"></th>
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody class="overflow-y-auto h-32">
+                    <tbody class="overflow-y-auto max-h-96">
                         @foreach ($movieHistories as $movieHistory)
                             @if (Auth::id() == $user->id) 
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     @if ($movieHistory->movie->img_path)
-                                        <td><img class="object-cover w-full rounded h-24 md:h-24 md:w-auto" src="{{  $movieHistory->movie->img_path }}" alt=""></td>
+                                        <td><img class="object-contain w-full rounded h-24 md:h-24 md:w-auto" src="{{  $movieHistory->movie->img_path }}" alt=""></td>
                                     @else
-                                        <td><img class="object-cover w-full rounded h-24 md:h-24 md:w-auto" src="{{ asset('img/no_img.png') }}" alt=""></td>
+                                        <td><img class="object-contain w-full rounded h-24 md:h-24 md:w-auto" src="{{ asset('img/no_img.png') }}" alt=""></td>
                                     @endif
-                                    <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $movieHistory->movie->title }}</td>
-                                    <td class="align-middle text-center">
+                                    <td class="md:w-auto w-1/2 font-medium text-gray-900 whitespace-wrap dark:text-white">{{ $movieHistory->movie->title }}</td>
+                                    <td class="align-middle text-center md:table-cell hidden">
                                         <x-evaluation evaluation="{{ $movieHistory->evaluation }}" />
                                     </td>
-                                    <td class="align-middle text-center">{{ $movieHistory->viewing_count }}回</td>
-                                    <td class="align-middle">{{ Str::limit($movieHistory->impression, 30, '...') }}</td>
+                                    <td class="md:hidden align-middle">
+                                        {{ $movieHistory->evaluation }}/5
+                                    </td>
+                                    <td class="align-middle text-center md:table-cell hidden">{{ $movieHistory->viewing_count }}回</td>
+                                    <td class="align-middle md:table-cell hidden">{{ Str::limit($movieHistory->impression, 30, '...') }}</td>
                                     <td><x-accessible accessible="{{ $movieHistory->accessible }}"></x-accessible></td>
                                     <td><a href="{{ route('historyDetail', ['id' => $movieHistory->id]) }}" class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline">履歴</a></td>
                                 </tr>
                             @elseif ($movieHistory->accessible)
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     @if ($movieHistory->movie->img_path)
-                                        <td><img class="object-cover w-full rounded h-24 md:h-24 md:w-auto" src="{{  $movieHistory->movie->img_path }}" alt=""></td>
+                                        <td><img class="object-contain w-full rounded h-24 md:h-24 md:w-auto" src="{{  $movieHistory->movie->img_path }}" alt=""></td>
                                     @else
-                                        <td><img class="object-cover w-full rounded h-24 md:h-24 md:w-auto" src="{{ asset('img/no_img.png') }}" alt=""></td>
+                                        <td><img class="object-contain w-full rounded h-24 md:h-24 md:w-auto" src="{{ asset('img/no_img.png') }}" alt=""></td>
                                     @endif
-                                    <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $movieHistory->movie->title }}</td>
+                                    <td class="md:w-auto w-1/2 font-medium text-gray-900 whitespace-wrap dark:text-white">{{ $movieHistory->movie->title }}</td>
                                     <td class="align-middle text-center">
                                         <x-evaluation evaluation="{{ $movieHistory->evaluation }}" />
                                     </td>
-                                    <td class="align-middle text-center">{{ $movieHistory->viewing_count }}回</td>
-                                    <td class="align-middle">{{ Str::limit($movieHistory->impression, 30, '...') }}</td>
+                                    <td class="md:hidden align-middle">
+                                        {{ $movieHistory->evaluation }}/5
+                                    </td>
+                                    <td class="align-middle text-center md:inline-table hidden">{{ $movieHistory->viewing_count }}回</td>
+                                    <td class="align-middle md:inline-table hidden">{{ Str::limit($movieHistory->impression, 30, '...') }}</td>
                                     <td></td>
                                     <td><a href="{{ route('historyDetail', ['id' => $movieHistory->id]) }}" class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline">履歴</a></td>
                                 </tr>
@@ -125,26 +131,29 @@
                         <tr>
                             <th scope="col" class="leading-10"></th>
                             <th scope="col" class="leading-10">タイトル</th>
-                            <th>平均評価</th>
-                            <th scope="col" class="leading-10" class="text-center">公開日</th>
-                            <th scope="col" class="leading-10">概要</th>
+                            <th>評価</th>
+                            <th scope="col" class="leading-10 text-center md:table-cell hidden">公開日</th>
+                            <th scope="col" class="leading-10 md:table-cell hidden">概要</th>
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody class="overflow-y-auto h-32">
+                    <tbody class="overflow-y-auto max-h-96">
                         @foreach ($interests as $interest)
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                             @if ($interest->movie->img_path)
-                                <td><img class="object-cover w-full rounded h-24 md:h-24 md:w-auto" src="{{  $interest->movie->img_path }}" alt=""></td>
+                                <td><img class="object-contain w-full rounded h-24 md:h-24 md:w-auto" src="{{  $interest->movie->img_path }}" alt=""></td>
                             @else
-                                <td><img class="object-cover w-full rounded h-24 md:h-24 md:w-auto" src="{{ asset('img/no_img.png') }}" alt=""></td>
+                                <td><img class="object-contain w-full rounded h-24 md:h-24 md:w-auto" src="{{ asset('img/no_img.png') }}" alt=""></td>
                             @endif
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $interest->movie->title }}</td>
-                            <td class="align-middle text-center">
+                            <td class="md:w-auto w-1/2 font-medium text-gray-900 whitespace-wrap dark:text-white">{{ $interest->movie->title }}</td>
+                            <td class="align-middle text-center md:table-cell hidden">
                                 <x-evaluation evaluation="{{ $interest->movie->movieHistories->avg('evaluation') }}" />
                             </td>
-                            <td class="align-middle text-center">{{ $interest->movie->release_date }}</td>
-                            <td class="align-middle">{{ Str::limit($interest->movie->overview, 30, '...') }}</td>
+                            <td class="md:hidden align-middle">
+                                {{ $interest->movie->movieHistories->avg('evaluation') }}/5
+                            </td>
+                            <td class="align-middle text-center md:table-cell hidden">{{ $interest->movie->release_date }}</td>
+                            <td class="align-middle md:table-cell hidden">{{ Str::limit($interest->movie->overview, 30, '...') }}</td>
                             <td><a href="{{ route('movieDetail', ['id' => $interest->movie->id]) }}" class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline">映画情報</a></td>
                         </tr>
                         @endforeach

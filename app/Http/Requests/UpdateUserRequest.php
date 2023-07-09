@@ -33,7 +33,7 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name.required' => '名前を入力してください',
-            'name.max' => '名前は10文字以下で入力してください',
+            'name.max' => 'ユーザー名は10文字以下で入力してください',
             'comment.max' => '本文は255文字以下で入力してください',
         ];
     }

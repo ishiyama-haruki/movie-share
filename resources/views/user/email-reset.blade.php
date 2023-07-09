@@ -18,7 +18,7 @@
             </ul>
         @endif
     </div>
-    <div class="w-1/2 mx-auto mt-5 p-5 bg-white border border-gray-200 shadow ">
+    <div class="md:w-1/2 w-full mx-auto mt-5 p-5 bg-white border border-gray-200 shadow ">
         <form action="{{ route('emailUpdate', ['id' => Auth::id()]) }}" method="POST">
             {{ csrf_field() }}
             <div class="mb-6">

@@ -9,12 +9,12 @@
             {{ session('flash_message') }}
         </div>
     @endif
-    <div class="w-3/4 mx-auto mt-4 bg-white p-5">
+    <div class="md:w-3/4 w-full mx-auto mt-4 bg-white md:p-5 py-5">
         <div class="flex flex-col items-center border border-gray-200 rounded-lg shadow md:flex-row">
             @if ($movie->img_path)
-                <img class="object-cover w-full rounded-t-lg h-96 md:h-full md:w-auto md:rounded-none md:rounded-l-lg" src="{{ $movie->img_path }}" alt="">
+                <img class="object-contain w-full rounded-t-lg h-96 md:h-full md:w-auto md:rounded-none md:rounded-l-lg" src="{{ $movie->img_path }}" alt="">
             @else
-                <img class="object-cover w-full rounded-t-lg h-96 md:h-full md:w-auto md:rounded-none md:rounded-l-lg" src="{{ asset('img/no_img.png') }}" alt="">
+                <img class="object-contain w-full rounded-t-lg h-96 md:h-full md:w-auto md:rounded-none md:rounded-l-lg" src="{{ asset('img/no_img.png') }}" alt="">
             @endif
             <div class="flex flex-col justify-between p-4 leading-normal">
                 <div class="flex items-center mb-3">
@@ -53,8 +53,8 @@
                     <tr>
                         <th scope="col" class="leading-10">ユーザー</th>
                         <th scope="col" class="leading-10">評価</th>
-                        <th scope="col" class="leading-10">視聴日</th>
-                        <th scope="col" class="leading-10">感想</th>
+                        <th scope="col" class="leading-10 md:table-cell hidden">視聴日</th>
+                        <th scope="col" class="leading-10 md:table-cell hidden">感想</th>
                         <td></td>
                     </tr>
                 </thead>
@@ -64,8 +64,8 @@
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <td class="leading-10"><a href="{{ route('profile', ['id' => $movieHistory->user->id]) }}" class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline">{{ $movieHistory->user->name }}</a></td>
                                 <td class="leading-10"><x-evaluation evaluation="{{ $movieHistory->evaluation }}" /></td>
-                                <td class="leading-10">{{ $movieHistory->viewing_date }}</td>
-                                <td class="leading-10">{{ Str::limit($movieHistory->impression, 40, '...') }}</td>
+                                <td class="leading-10 md:table-cell hidden">{{ $movieHistory->viewing_date }}</td>
+                                <td class="leading-10 md:table-cell hidden">{{ Str::limit($movieHistory->impression, 40, '...') }}</td>
                                 <td><a href="{{ route('historyDetail', ['id' => $movieHistory->id]) }}" class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline">履歴</a></td>
                             </tr>
                         @endif

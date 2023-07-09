@@ -77,16 +77,27 @@
                 <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
                 <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
             </div>
+            <div class="mt-3 w-3/4 mx-auto space-x-8 flex">
+                <x-nav-link :href="route('profile', ['id' => Auth::id()])" :active="request()->is('user/' . Auth::id())">
+                    {{ __('マイページ') }}
+                </x-nav-link>
+                <x-nav-link :href="route('create')" :active="request()->routeIs('create') or request()->routeIs('createByMovie')">
+                    {{ __('履歴登録') }}
+                </x-nav-link>
+                <x-nav-link :href="route('movieIndex')" :active="request()->routeIs('movieIndex') or request()->routeIs('movieSearch')">
+                    {{ __('映画一覧') }}
+                </x-nav-link>
+            </div>
 
             <div class="mt-3 space-y-1">
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-
+                
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        {{ __('ログアウト') }}
                     </x-responsive-nav-link>
                 </form>
             </div>

@@ -82,7 +82,7 @@ if (location.pathname.startsWith("/movieHistory") && location.pathname.endsWith(
             setYoutubeId: function() {
                 axios.get('https://www.googleapis.com/youtube/v3/search', {
                     params: {
-                        q: this.selectedMovie.title +  + '　' + this.selectedMovie.release_date + '　予告編',
+                        q: this.selectedMovie.title + '　映画　予告編',
                         type: 'video',
                         part: 'snippet',
                         maxResults: 1,
