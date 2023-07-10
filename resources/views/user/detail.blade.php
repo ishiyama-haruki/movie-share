@@ -75,7 +75,7 @@
                         <tr>
                             <th scope="col" class="leading-10"></th>
                             <th scope="col" class="leading-10">タイトル</th>
-                            <th scope="col" class="leading-10 text-center">評価</th>
+                            <th scope="col" class="leading-10">評価</th>
                             <th scope="col" class="leading-10 text-center md:table-cell hidden">視聴回数</th>
                             <th scope="col" class="leading-10 md:table-cell hidden">感想</th>
                             <th scope="col" class="leading-10"></th>
@@ -117,8 +117,8 @@
                                     <td class="md:hidden align-middle">
                                         {{ $movieHistory->evaluation }}/5
                                     </td>
-                                    <td class="align-middle text-center md:inline-table hidden">{{ $movieHistory->viewing_count }}回</td>
-                                    <td class="align-middle md:inline-table hidden">{{ Str::limit($movieHistory->impression, 30, '...') }}</td>
+                                    <td class="align-middle text-center md:table-cell hidden">{{ $movieHistory->viewing_count }}回</td>
+                                    <td class="align-middle md:table-cell hidden">{{ Str::limit($movieHistory->impression, 30, '...') }}</td>
                                     <td></td>
                                     <td><a href="{{ route('historyDetail', ['id' => $movieHistory->id]) }}" class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline">履歴</a></td>
                                 </tr>
@@ -131,7 +131,7 @@
                         <tr>
                             <th scope="col" class="leading-10"></th>
                             <th scope="col" class="leading-10">タイトル</th>
-                            <th>評価</th>
+                            <th scope="col" class="leading-10">評価</th>
                             <th scope="col" class="leading-10 text-center md:table-cell hidden">公開日</th>
                             <th scope="col" class="leading-10 md:table-cell hidden">概要</th>
                             <th></th>
