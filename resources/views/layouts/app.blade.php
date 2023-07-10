@@ -14,8 +14,8 @@
         <!-- @vite(['resources/css/app.css', 'resources/js/app.js']) -->
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-		<script src="{{ asset('js/app.js') }}" defer></script>
-		<link href="/css/app.css" rel="stylesheet">
+		<script src="{{ mix('js/app.js') }}" defer></script>
+		<link href="{{ mix('css/app.css') }}" rel="stylesheet">
         
     </head>
     <body class="font-sans antialiased">
