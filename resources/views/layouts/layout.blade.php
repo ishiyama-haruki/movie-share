@@ -8,9 +8,9 @@
 
 		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-		<script src="{{ asset('js/app.js') }}" defer></script>
+		<script src="{{ url(mix('js/app.js')) }}" defer></script>
 
-		<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+		<link href="{{ url(mix('css/app.css')) }}" rel="stylesheet">
 	</head>
 
 	<body>
