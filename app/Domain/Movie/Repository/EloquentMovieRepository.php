@@ -14,6 +14,25 @@ class EloquentMovieRepository
         $this->eloquentMovie = $eloquentMovie;
     }
 
+    public function getMovies()
+    {
+        $eloquentMovies = $this->eloquentMovie->get();
+        return $eloquentMovies;
+    }
+
+    public function searchMovies($params)
+    {
+        $eloquentMovies = $this->eloquentMovie->where('title', 'like', '%' . $params['title'] . '%')
+                                                ->orWhere('original_title', 'like', '%' . $params['title'] . '%')
+                                                ->get();
+        return $eloquentMovies;
+    }
+
+    public function getMovieFromId($id)
+    {   
+        return $this->eloquentMovie->findOrFail($id);
+    }
+
     public function checkExist($params)
     {
         $movieQuery = $this->eloquentMovie->where('title', $params['title'])

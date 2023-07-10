@@ -21,10 +21,12 @@ class Movie extends Model
 
     protected $fillable = [
         'title',
+        'original_title',
         'category_id',
         'overview',
         'release_date',
         'img_path',
+        'youtube_id'
     ];
 
     protected $guarded = ['created_at', 'updated_at'];

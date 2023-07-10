@@ -1,0 +1,1 @@
+<img src="{{ asset('img/movie_share_logo.png') }}" {{ $attributes }} alt="">

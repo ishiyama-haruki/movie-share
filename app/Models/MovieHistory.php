@@ -19,6 +19,11 @@ class MovieHistory extends Model
         return $this->belongsTo(Movie::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     protected $fillable = [
         'user_id',
         'movie_id',
@@ -26,7 +31,8 @@ class MovieHistory extends Model
         'evaluation',
         'place',
         'impression',
-        'viewing_count'
+        'viewing_count',
+        'accessible'
     ];
 
     protected $guarded = ['created_at', 'updated_at'];
