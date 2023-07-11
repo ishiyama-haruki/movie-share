@@ -14,6 +14,9 @@
         <!-- @vite(['resources/css/app.css', 'resources/js/app.js']) -->
         <link rel="stylesheet" href="{{ url(mix('css/app.css')) }}">
         <script src="{{ url(mix('js/app.js')) }}" defer></script>
+
+        <!-- faviconエラー回避 -->
+        <link rel="icon" href="data:,">
         
     </head>
     <body>

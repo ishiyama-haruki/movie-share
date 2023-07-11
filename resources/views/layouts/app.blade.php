@@ -13,9 +13,11 @@
         <!-- Scripts -->
         <!-- @vite(['resources/css/app.css', 'resources/js/app.js']) -->
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-		<!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
 		<script src="{{ url(mix('js/app.js')) }}" defer></script>
 		<link href="{{ url(mix('css/app.css')) }}" rel="stylesheet">
+
+        <!-- faviconエラー回避 -->
+        <link rel="icon" href="data:,">
         
     </head>
     <body class="font-sans antialiased">
