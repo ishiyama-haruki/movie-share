@@ -1,4 +1,7 @@
+import { createApp } from 'vue';
+
 if (location.pathname.startsWith("/movieHistory") && location.pathname.endsWith("create")) {
+
     const app = {
         data() {
             return {
@@ -11,14 +14,14 @@ if (location.pathname.startsWith("/movieHistory") && location.pathname.endsWith(
                 selectedFlag: false,
             }
         },
-        mounted: function () {
+        mounted() {
             this.userId = document.getElementById('userId').value;
             this.getUserHistory()
 
             this.setJsonData()
         },
         computed: {
-            existFlag: function() {
+            existFlag() {
                 if (this.userHistory.includes(this.selectedMovie.title)) {
                     return true
                 }
@@ -100,8 +103,7 @@ if (location.pathname.startsWith("/movieHistory") && location.pathname.endsWith(
                 document.getElementById('createForm').submit();
             }
         }
-       
-    }
-
-    Vue.createApp(app).mount('#createForm')
+    };
+    
+    createApp(app).mount('#createForm');
 }
