@@ -1,3 +1,5 @@
+import { createApp } from 'vue';
+
 if (location.pathname.startsWith("/user")) {
     const app = {
         data() {
@@ -15,5 +17,5 @@ if (location.pathname.startsWith("/user")) {
        
     }
 
-    Vue.createApp(app).mount('#userDetail')
+    createApp(app).mount('#userDetail');
 }
