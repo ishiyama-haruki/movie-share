@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 
-if (location.pathname.startsWith("/movieHistory") && location.pathname.endsWith("create")) {
+if (location.pathname.startsWith("/movie/movieHistory") && location.pathname.endsWith("create")) {
 
     const app = {
         data() {

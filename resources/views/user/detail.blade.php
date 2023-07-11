@@ -36,7 +36,7 @@
                     <span class="block text-xl ml-3">{{ $user->email }}</span>
                 </div>
                 <span class="block text-sm ml-3 mb-3">
-                    ＊メールアドレスはパスワードリセットの際に必要となります。実在するメールアドレスを設定してください。
+                    ＊メールアドレスはパスワードリセットの際に必要となります。実在するメールアドレスを設定してください。<br class="md:hidden inline">
                     (<a href="{{ route('email') }}" class="text-blue-600 underline dark:text-blue-500 hover:no-underline">メールアドレス変更</a>)
                 </span>
                 <div class="flex items-end w-full">

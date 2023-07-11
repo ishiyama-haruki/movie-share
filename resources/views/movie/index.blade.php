@@ -19,7 +19,7 @@
         @endif
         @if (count($movies) == 0)
             <div class="mb-5 text-lg font-medium text-gray-900 dark:text-white text-center">
-                お目当ての映画は存在しませんでした。ぜひ登録してくれよな！
+                お目当ての映画は存在しませんでした。<br class="md:hidden inline">ぜひ登録してくれよな！
             </div>
         @endif
         <div class="card bg-white">
