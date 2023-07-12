@@ -16,8 +16,7 @@
 		<script src="{{ url(mix('js/app.js')) }}" defer></script>
 		<link href="{{ url(mix('css/app.css')) }}" rel="stylesheet">
 
-        <!-- faviconエラー回避 -->
-        <link rel="icon" href="data:,">
+        <link rel="icon" href="{{ asset('img/movie_share_logo.png') }}" />
         
     </head>
     <body class="font-sans antialiased">
