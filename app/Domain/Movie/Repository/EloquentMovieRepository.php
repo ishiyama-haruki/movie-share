@@ -16,7 +16,7 @@ class EloquentMovieRepository
 
     public function getMovies()
     {
-        $eloquentMovies = $this->eloquentMovie->get();
+        $eloquentMovies = $this->eloquentMovie->paginate(10);
         return $eloquentMovies;
     }
 
@@ -25,6 +25,7 @@ class EloquentMovieRepository
         $eloquentMovies = $this->eloquentMovie->where('title', 'like', '%' . $params['title'] . '%')
                                                 ->orWhere('original_title', 'like', '%' . $params['title'] . '%')
                                                 ->get();
+
         return $eloquentMovies;
     }
 

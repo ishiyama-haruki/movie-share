@@ -58,5 +58,6 @@
             </table>
         </div>
     </div>
+    {{ $movies->links() }}
 
 </x-app-layout>
