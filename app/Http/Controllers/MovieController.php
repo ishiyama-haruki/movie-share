@@ -28,7 +28,7 @@ class MovieController extends Controller
     {
         $movies = $this->movieDomainservice->getMovies();
 
-        return view('movie.index', ['movies' => $movies]);
+        return view('movie.index', ['movies' => $movies, 'search' => false]);
     }
 
     public function search(Request $request)
@@ -36,7 +36,7 @@ class MovieController extends Controller
         $params = $request->all();
         $movies = $this->movieDomainservice->searchMovies($params);
         
-        return view('movie.index', ['movies' => $movies]);
+        return view('movie.index', ['movies' => $movies, 'search' => true]);
     }
 
     public function detail(int $id)

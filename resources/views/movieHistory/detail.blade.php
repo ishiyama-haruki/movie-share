@@ -152,7 +152,7 @@
             <div class=" mt-14 border border-gray-200 rounded-lg shadow max-h-176 overflow-y-auto">
                 <form method="GET">
                     <table class="w-full text-left text-gray-500">
-                        <tbody class="overflow-y-auto">
+                        <tbody>
                                 @foreach($movieHistory->comments()->get() as $comment)
                                     <tr class="border-b">
                                         <td class="md:p-2 p-1 md:w-auto w-1/4">

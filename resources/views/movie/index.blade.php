@@ -10,8 +10,10 @@
             <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none">検索</button>
         </form>
     </div>
-    <h3 class="text-center md:text-3xl text-2xl font-extrabold mt-5 md:mt-10 mb-3">現在の登録動画数：{{ count($movies) }}</h3>
-    <div class="md:w-4/5 w-full mx-auto my-5 md:p-5 bg-white overflow-y-auto max-h-272">
+    @if (!$search)
+        <h3 class="text-center md:text-3xl text-2xl font-extrabold mt-5 md:mt-10 mb-3">現在の登録動画数：{{ $movies->total() }}</h3>
+    @endif
+    <div class="md:w-4/5 w-full mx-auto my-5 md:p-5 bg-white">
         @if (session('flash_message'))
             <div class="mb-5 text-blue-600 text-center">
                 {{ session('flash_message') }}
@@ -58,6 +60,8 @@
             </table>
         </div>
     </div>
-    {{ $movies->links() }}
+    @if (!$search)
+        {{ $movies->links() }}
+    @endif
 
 </x-app-layout>

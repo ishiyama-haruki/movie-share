@@ -47,7 +47,7 @@
                 </div> 
             </div>
         </div>
-        <div class="mt-5 border border-gray-200 rounded-lg shadow text-left text-gray-500 overflow-y-auto max-h-176">
+        <div class="mt-5 border border-gray-200 rounded-lg shadow text-left text-gray-500">
             <table class="w-full">
                 <thead class="text-gray-700 bg-gray-200">
                     <tr>
