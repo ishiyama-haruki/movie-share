@@ -69,7 +69,7 @@
                 </li>
             </ul>
             </div>
-            <div class="card-body overflow-y-auto max-h-272">
+            <div class="card-body">
                 <table class="w-full text-left text-gray-500" v-show="historyFlag">
                     <thead class="text-gray-700 bg-gray-200">
                         <tr>
@@ -82,7 +82,7 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody class="overflow-y-auto max-h-96">
+                    <tbody>
                         @foreach ($movieHistories as $movieHistory)
                             @if (Auth::id() == $user->id) 
                                 <tr class="bg-white border-b">
@@ -137,7 +137,7 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody class="overflow-y-auto max-h-96">
+                    <tbody>
                         @foreach ($interests as $interest)
                         <tr class="bg-white border-b">
                             @if ($interest->movie->img_path)

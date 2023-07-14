@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\Movie;
+
 use App\Domain\Movie\DomainService\MovieDomainService;
 use App\Domain\Interest\DomainService\InterestDomainService;
 
@@ -26,7 +28,7 @@ class MovieController extends Controller
     {
         $movies = $this->movieDomainservice->getMovies();
 
-        return view('movie.index', ['movies' => $movies]);
+        return view('movie.index', ['movies' => $movies, 'search' => false]);
     }
 
     public function search(Request $request)
@@ -34,7 +36,7 @@ class MovieController extends Controller
         $params = $request->all();
         $movies = $this->movieDomainservice->searchMovies($params);
         
-        return view('movie.index', ['movies' => $movies]);
+        return view('movie.index', ['movies' => $movies, 'search' => true]);
     }
 
     public function detail(int $id)
