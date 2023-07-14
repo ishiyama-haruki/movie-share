@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 
-if (location.pathname.startsWith("/user")) {
+if (location.pathname.startsWith("/movie/user")) {
     const app = {
         data() {
             return {
