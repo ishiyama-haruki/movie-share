@@ -76,7 +76,7 @@
                             <th scope="col" class="leading-10"></th>
                             <th scope="col" class="leading-10 text-sm md:text-base">タイトル</th>
                             <th scope="col" class="leading-10 text-sm md:text-base text-center md:text-left">評価</th>
-                            <th scope="col" class="leading-10 text-center md:table-cell hidden">回数</th>
+                            <th scope="col" class="leading-10 text-center md:table-cell hidden">視聴日</th>
                             <th scope="col" class="leading-10 md:table-cell hidden">感想</th>
                             <th scope="col" class="leading-10"></th>
                             <th></th>
@@ -98,7 +98,7 @@
                                     <td class="md:hidden align-middle text-sm text-center">
                                         {{ $movieHistory->evaluation }}/5
                                     </td>
-                                    <td class="align-middle px-2 text-center md:table-cell hidden">{{ $movieHistory->viewing_count }}回</td>
+                                    <td class="align-middle px-2 text-center md:table-cell hidden">{{ $movieHistory->viewing_date }}</td>
                                     <td class="align-middle md:table-cell hidden">{{ Str::limit($movieHistory->impression, 30, '...') }}</td>
                                     <td class="px-2"><x-accessible accessible="{{ $movieHistory->accessible }}"></x-accessible></td>
                                     <td><a href="{{ route('historyDetail', ['id' => $movieHistory->id]) }}" class="block font-medium text-sm md:text-base text-blue-600 underline hover:no-underline">履歴</a></td>
@@ -117,7 +117,7 @@
                                     <td class="md:hidden align-middle text-sm text-center">
                                         {{ $movieHistory->evaluation }}/5
                                     </td>
-                                    <td class="align-middle px-2 text-center md:table-cell hidden">{{ $movieHistory->viewing_count }}回</td>
+                                    <td class="align-middle px-2 text-center md:table-cell hidden">{{ $movieHistory->viewing_date }}</td>
                                     <td class="align-middle md:table-cell hidden">{{ Str::limit($movieHistory->impression, 30, '...') }}</td>
                                     <td></td>
                                     <td><a href="{{ route('historyDetail', ['id' => $movieHistory->id]) }}" class="block font-medium text-sm md:text-base text-blue-600 underline hover:no-underline">履歴</a></td>

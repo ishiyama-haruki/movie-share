@@ -25,7 +25,7 @@ class EloquentMovieHistoryRepository
 
     public function getMovieHistoriesFromUserId($userId)
     {
-        $movieHistories = $this->eloquentMovieHistory->where('user_id', $userId)->get();
+        $movieHistories = $this->eloquentMovieHistory->where('user_id', $userId)->orderBy('viewing_date', 'DESC')->get();
         return $movieHistories;
     }
 
