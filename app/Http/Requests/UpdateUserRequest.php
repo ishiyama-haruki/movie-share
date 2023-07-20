@@ -25,6 +25,7 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => 'required|max:10',
+            'email' => 'required|email|string|unique:users',
             'comment' => 'nullable|max:255'
         ];
     }
@@ -34,6 +35,9 @@ class UpdateUserRequest extends FormRequest
         return [
             'name.required' => '名前を入力してください',
             'name.max' => 'ユーザー名は10文字以下で入力してください',
+            'email.required' => 'メールアドレスを入力してください',
+            'email.email' => 'メールアドレスの形式が不適切です',
+            'email.unique' => 'このメールアドレスはすでに使用されています',
             'comment.max' => '本文は255文字以下で入力してください',
         ];
     }
