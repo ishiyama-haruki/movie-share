@@ -19,8 +19,12 @@
         @endif
     </div>
     <div id="userDetail" class="2xl:w-3/4 md:w-4/5 w-full mx-auto mt-5 md:p-5 py-5 bg-white">
-        <div class="w-1/2 mx-auto flex flex-col items-center pb-10">
-            <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="/docs/images/people/profile-picture-3.jpg" alt="Bonnie image"/>
+        <div class="md:w-1/2 w-5/6 mx-auto flex flex-col items-center pb-10">
+            @if ($user->img_path)
+                <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{{ asset($user->img_path) }}" alt="Bonnie image"/>
+            @else
+                <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{{ asset('img/movie_share_logo.png') }}" alt="">
+            @endif
             <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ $user->name }}</h5>
             <span class="text-sm text-gray-500 dark:text-gray-400">{{ $user->comment }}</span>
             @if (Auth::id() == $user->id)

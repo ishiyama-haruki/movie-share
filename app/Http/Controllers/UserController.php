@@ -42,6 +42,13 @@ class UserController extends Controller
     public function update(int $id, UpdateUserRequest $request)
     {
         $params = $request->validated();
+
+        if ($request->hasFile('photo')) { 
+            $img_path = $request->file('image')->store('public/profile');
+            $img_path = str_replace('public', 'storage', $img_path);
+            $params['img_path'] = $img_path;
+        }
+
         $this->userDomainservice->updateUser($id, $params);
 
         return redirect()->route('profile', ['id' => $id])->with('flash_message', 'プロフィールを更新したよ!');
