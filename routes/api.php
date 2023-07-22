@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::get('/user/{id}', 'App\Http\Controllers\UserController@getHistory');
+Route::get('/movieHistory', 'App\Http\Controllers\MovieHistoryController@getData');

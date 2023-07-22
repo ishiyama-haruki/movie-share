@@ -28,6 +28,7 @@ class User extends Authenticatable
         'name',
         'email',
         'comment',
+        'img_path',
         'password',
     ];
 

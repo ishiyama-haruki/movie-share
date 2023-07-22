@@ -19,45 +19,20 @@
         @endif
     </div>
     <div id="userDetail" class="2xl:w-3/4 md:w-4/5 w-full mx-auto mt-5 md:p-5 py-5 bg-white">
-        @if (Auth::id() == $user->id)
-            <form action="{{ route('profileUpdate', ['id' => $user->id]) }}" method="post" class="mb-8 md:mx-0 mx-2">
-                {{ csrf_field() }}
-                <div class="flex items-center mb-2">
-                    <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-                        <path d="M16 0H4a2 2 0 0 0-2 2v1H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4.5a3 3 0 1 1 0 6 3 3 0 0 1 0-6ZM13.929 17H7.071a.5.5 0 0 1-.5-.5 3.935 3.935 0 1 1 7.858 0 .5.5 0 0 1-.5.5Z"/>
-                    </svg>
-                    <input type="text" name="name" value="{{ $user->name }}" required class="ml-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
+        <div class="md:w-1/2 w-5/6 mx-auto flex flex-col items-center pb-10">
+            @if ($user->img_path)
+                <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{{ asset($user->img_path) }}" alt="Bonnie image"/>
+            @else
+                <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{{ asset('img/movie_share_logo.png') }}" alt="">
+            @endif
+            <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ $user->name }}</h5>
+            <span class="text-sm text-gray-500 dark:text-gray-400">{{ $user->comment }}</span>
+            @if (Auth::id() == $user->id)
+                <div class="flex mt-4 space-x-3 md:mt-6">
+                    <a href="{{ route('profileUpdateForm') }}"  class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">プロフィールの編集</a>
                 </div>
-                <div class="flex items-center mb-2">
-                    <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill="currentColor" d="m18.774 8.245-.892-.893a1.5 1.5 0 0 1-.437-1.052V5.036a2.484 2.484 0 0 0-2.48-2.48H13.7a1.5 1.5 0 0 1-1.052-.438l-.893-.892a2.484 2.484 0 0 0-3.51 0l-.893.892a1.5 1.5 0 0 1-1.052.437H5.036a2.484 2.484 0 0 0-2.48 2.481V6.3a1.5 1.5 0 0 1-.438 1.052l-.892.893a2.484 2.484 0 0 0 0 3.51l.892.893a1.5 1.5 0 0 1 .437 1.052v1.264a2.484 2.484 0 0 0 2.481 2.481H6.3a1.5 1.5 0 0 1 1.052.437l.893.892a2.484 2.484 0 0 0 3.51 0l.893-.892a1.5 1.5 0 0 1 1.052-.437h1.264a2.484 2.484 0 0 0 2.481-2.48V13.7a1.5 1.5 0 0 1 .437-1.052l.892-.893a2.484 2.484 0 0 0 0-3.51Z"/>
-                        <path fill="#fff" d="M8 13a1 1 0 0 1-.707-.293l-2-2a1 1 0 1 1 1.414-1.414l1.42 1.42 5.318-3.545a1 1 0 0 1 1.11 1.664l-6 4A1 1 0 0 1 8 13Z"/>
-                    </svg>
-                    <span class="block text-xl ml-3">{{ $user->email }}</span>
-                </div>
-                <span class="block text-sm ml-3 mb-3">
-                    ＊メールアドレスはパスワードリセットの際に必要となります。実在するメールアドレスを設定してください。<br class="md:hidden inline">
-                    (<a href="{{ route('email') }}" class="text-blue-600 underline hover:no-underline">メールアドレス変更</a>)
-                </span>
-                <div class="flex items-end w-full">
-                    <textarea name="comment" id="" cols="40" rows="3" value="{{ $user->comment }}" class="md:w-1/2 w-3/4 block p-2.5 mr-3 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500">{{ $user->comment }}</textarea>
-                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">更新</button>
-                </div>
-            </form>
-        @else
-            <div class="mb-5 ml-3">
-                <div class="flex items-center mb-2">
-                    <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-                        <path d="M16 0H4a2 2 0 0 0-2 2v1H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v2H1a1 1 0 0 0 0 2h1v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4.5a3 3 0 1 1 0 6 3 3 0 0 1 0-6ZM13.929 17H7.071a.5.5 0 0 1-.5-.5 3.935 3.935 0 1 1 7.858 0 .5.5 0 0 1-.5.5Z"/>
-                    </svg>
-                    <h2 class="font-bold text-2xl">{{ $user->name }}</h2>    
-                </div>
-                <div class="flex items-end">
-                    <p>{{ $user->comment }}</p>        
-                </div>
-            </div>
-        @endif
-
+            @endif
+        </div>
         <div class="card bg-white">
             <div class="card-header">
             <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200">

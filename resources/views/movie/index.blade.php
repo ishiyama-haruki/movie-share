@@ -4,16 +4,19 @@
             {{ __('映画一覧') }}
         </h2>
     </x-slot>
-    <div class="flex justify-center">
+    @if (!$search)
+        <h3 class="text-center md:text-3xl text-2xl font-extrabold mt-5 md:mt-10 mb-3">現在の登録動画数：{{ $movies->total() }}</h3>
+        <div class="md:w-1/2 mx-auto bg-white">
+            <x-index-chart />
+        </div>
+    @endif
+    <div class="flex justify-center mt-5">
         <form action="{{ route('movieSearch') }}" method="get" class="md:w-1/3 w-3/4 mt-5 mx-auto flex items-center">
             <input type="text" name="title" class="md:w-1/2 w-2/3 md:mr-5 mr-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" placeholder="映画タイトル">
             <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none">検索</button>
         </form>
     </div>
-    @if (!$search)
-        <h3 class="text-center md:text-3xl text-2xl font-extrabold mt-5 md:mt-10 mb-3">現在の登録動画数：{{ $movies->total() }}</h3>
-    @endif
-    <div class="md:w-4/5 w-full mx-auto my-5 md:p-5 bg-white">
+    <div class="md:w-4/5 w-full mx-auto md:my-5 my-2 md:p-5 bg-white">
         @if (session('flash_message'))
             <div class="mb-5 text-blue-600 text-center">
                 {{ session('flash_message') }}
