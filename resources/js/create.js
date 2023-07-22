@@ -39,7 +39,7 @@ if (location.pathname.startsWith("/movie/movieHistory") && location.pathname.end
                 }
             },
             getUserHistory: function() {
-                axios.get("/api/movie/user/" + this.userId)
+                axios.get("/movie/api/user/" + this.userId)
                 .then(response => {
                     this.userHistory = response.data;
                     

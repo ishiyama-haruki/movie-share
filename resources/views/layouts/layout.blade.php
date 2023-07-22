@@ -7,7 +7,6 @@
 		<title>映画シェアアプリ</title>
 
 		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 		<script src="{{ url(mix('js/app.js')) }}" defer></script>
 
