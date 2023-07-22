@@ -8,8 +8,6 @@ final class MovieHistoryDomainService
 {
     private EloquentMovieHistoryRepository $movieHistoryRepo;
 
-    private const PER_PAGE = 50;
-
     public function __construct(
         EloquentMovieHistoryRepository $movieHIstoryRepo
     ) {
@@ -44,6 +42,11 @@ final class MovieHistoryDomainService
     public function deleteMovieHistory($id)
     {
         return $this->movieHistoryRepo->deleteMovieHistory($id);
+    }
+
+    public function getMovieChartData()
+    {
+        return $this->movieHistoryRepo->getMovieChartData();
     }
 
 }

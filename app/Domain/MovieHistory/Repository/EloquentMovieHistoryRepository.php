@@ -4,6 +4,8 @@ namespace App\Domain\MovieHistory\Repository;
 
 use App\Models\MovieHistory;
 
+use Carbon\Carbon;
+
 
 class EloquentMovieHistoryRepository
 {
@@ -56,5 +58,26 @@ class EloquentMovieHistoryRepository
     public function deleteMovieHistory($id)
     {
         return $this->eloquentMovieHistory->findOrFail($id)->delete();
+    }
+
+    public function getMovieChartData()
+    {
+        $period = 5;
+
+        $day = Carbon::today()->startOfMonth()->subMonths($period - 1);
+        
+        $chartData = [
+            'labels' => [],
+            'data' => []
+        ];
+
+        for ($i = 0; $i < $period; $i++) {
+            $chartData['labels'][] = $day->format('Y-m');
+            $chartData['data'][] = $this->eloquentMovieHistory->whereYear('viewing_date', $day->year)->whereMonth('viewing_date', $day->month)->count();
+
+            $day->addMonth();
+        }
+
+        return $chartData;
     }
 }

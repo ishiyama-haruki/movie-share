@@ -81,4 +81,10 @@ class MovieHistoryController extends Controller
         $userId = Auth::id();
         return redirect()->route('profile', ['id' => $userId])->with('flash_message', '削除が完了しました');
     }
+
+    public function getData()
+    {
+        $response = $this->movieHistoryDomainservice->getMovieChartData();
+        return $response;
+    }
 }
