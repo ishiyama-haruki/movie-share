@@ -43,7 +43,7 @@ class UserController extends Controller
     {
         $params = $request->validated();
 
-        if ($request->hasFile('photo')) { 
+        if ($request->hasFile('image')) { 
             $img_path = $request->file('image')->store('public/profile');
             $img_path = str_replace('public', 'storage', $img_path);
             $params['img_path'] = $img_path;
