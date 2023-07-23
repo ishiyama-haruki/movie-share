@@ -5,7 +5,7 @@
 <script>
   const ctx = document.getElementById('myChart');
 
-  axios.get("/movie/api/movieHistory/")
+  axios.get("/api/movieHistory/")
     .then(response => {
         new Chart(ctx, {
             type: 'line',
