@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use \App\Http\Requests\UpdateUserRequest;
+use Illuminate\Support\Facades\Storage;
 
 use App\Domain\User\DomainService\UserDomainService;
 use App\Domain\MovieHistory\DomainService\MovieHistoryDomainService;
@@ -44,6 +44,10 @@ class UserController extends Controller
         $params = $request->validated();
 
         if ($request->hasFile('image')) { 
+            // 既存の画像の削除
+            $user = $this->userDomainservice->getUserFromId($id);
+            Storage::disk('public')->delete(str_replace('storage/', '', $user->img_path));
+
             $img_path = $request->file('image')->store('public/profile');
             $img_path = str_replace('public', 'storage', $img_path);
             $params['img_path'] = $img_path;

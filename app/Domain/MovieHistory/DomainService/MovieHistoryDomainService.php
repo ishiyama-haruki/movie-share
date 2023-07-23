@@ -49,4 +49,9 @@ final class MovieHistoryDomainService
         return $this->movieHistoryRepo->getMovieChartData();
     }
 
+    public function commentToRead($id)
+    {
+        return $this->movieHistoryRepo->commentToRead($id);
+    }
+
 }

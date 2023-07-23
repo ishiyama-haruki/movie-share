@@ -3,18 +3,23 @@
 namespace App\Domain\MovieHistory\Repository;
 
 use App\Models\MovieHistory;
+use App\Models\Comment;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 
 class EloquentMovieHistoryRepository
 {
     private MovieHistory $eloquentMovieHistory;
+    private Comment $eloquentComment;
 
     public function __construct(
-        MovieHistory $movieHistory
+        MovieHistory $movieHistory,
+        Comment $comment
     ) {
         $this->eloquentMovieHistory = $movieHistory;
+        $this->eloquentComment = $comment;
     }
 
     public function storeMovieHistory($params)
@@ -79,5 +84,14 @@ class EloquentMovieHistoryRepository
         }
 
         return $chartData;
+    }
+
+    public function commentToRead($id)
+    {
+        $movieHistory = $this->eloquentMovieHistory->findOrFail($id);
+        if ($movieHistory->user_id != Auth::id()) {
+            return;
+        }
+        return $this->eloquentComment->where('movie_history_id', $id)->update(['is_read' => 1]);
     }
 }
