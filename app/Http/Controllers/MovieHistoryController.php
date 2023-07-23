@@ -62,6 +62,8 @@ class MovieHistoryController extends Controller
     public function detail(int $id)
     {
         $movieHistory = $this->movieHistoryDomainservice->getHistoryFromId($id);
+        
+        $this->movieHistoryDomainservice->commentToRead($id);
 
         return view('movieHistory.detail', ['movieHistory' => $movieHistory]);
     }

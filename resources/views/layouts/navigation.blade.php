@@ -14,7 +14,10 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('profile', ['id' => Auth::id()])" :active="request()->is('user/' . Auth::id())">
-                        {{ __('マイページ') }}
+                        マイページ
+                        @if (Auth::user()->nonread_comment_counts != 0)
+                            <span class="rounded-full bg-red-400 text-white px-2 py-1">{{ Auth::user()->nonread_comment_counts }}</span>
+                        @endif
                     </x-nav-link>
                     <x-nav-link :href="route('create')" :active="request()->routeIs('create') or request()->routeIs('createByMovie')">
                         {{ __('履歴登録') }}
@@ -77,9 +80,12 @@
                 <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
                 <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
             </div>
-            <div class="mt-3 w-3/4 mx-auto space-x-8 flex">
+            <div class="mt-3 w-5/6 mx-auto space-x-8 flex">
                 <x-nav-link :href="route('profile', ['id' => Auth::id()])" :active="request()->is('user/' . Auth::id())">
-                    {{ __('マイページ') }}
+                    マイページ
+                    @if (Auth::user()->nonread_comment_counts != 0)
+                        <span class="rounded-full bg-red-400 text-white px-2 py-1">{{ Auth::user()->nonread_comment_counts }}</span>
+                    @endif
                 </x-nav-link>
                 <x-nav-link :href="route('create')" :active="request()->routeIs('create') or request()->routeIs('createByMovie')">
                     {{ __('履歴登録') }}

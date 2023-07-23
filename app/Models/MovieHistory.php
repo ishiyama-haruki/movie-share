@@ -24,6 +24,11 @@ class MovieHistory extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function getNonreadCommentCountsAttribute()
+    {
+        return $this->comments()->where('user_id', '!=', $this->user_id)->where('is_read', 0)->count();
+    }
+
     protected $fillable = [
         'user_id',
         'movie_id',

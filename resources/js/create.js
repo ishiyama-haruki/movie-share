@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 
-if (location.pathname.startsWith("/movieHistory") && location.pathname.endsWith("create")) {
+if (location.pathname.startsWith("/movie/movieHistory") && location.pathname.endsWith("create")) {
 
     const app = {
         data() {
@@ -39,7 +39,7 @@ if (location.pathname.startsWith("/movieHistory") && location.pathname.endsWith(
                 }
             },
             getUserHistory: function() {
-                axios.get("/api/user/" + this.userId)
+                axios.get("/movie/api/user/" + this.userId)
                 .then(response => {
                     this.userHistory = response.data;
                     

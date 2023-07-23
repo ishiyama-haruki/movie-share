@@ -66,7 +66,12 @@
                                     @else
                                     <td class="w-1/6 md:w-auto"><img class="object-contain w-full rounded h-auto md:h-24 md:w-auto" src="{{ asset('img/no_img.png') }}" alt=""></td>
                                     @endif
-                                    <td class="w-1/2 md:w-1/3 font-medium text-sm md:text-base text-gray-900 whitespace-wrap">{{ $movieHistory->movie->title }}</td>
+                                    <td class="w-1/2 md:w-1/3 font-medium text-sm md:text-base text-gray-900 whitespace-wrap">
+                                        {{ $movieHistory->movie->title }} 
+                                        @if ($movieHistory->nonread_comment_counts != 0)
+                                            <span class="rounded-full bg-red-400 text-white px-2 py-1">{{ $movieHistory->nonread_comment_counts }}</span>
+                                        @endif
+                                    </td>
                                     <td class="align-middle text-center md:table-cell hidden">
                                         <x-evaluation evaluation="{{ $movieHistory->evaluation }}" />
                                     </td>

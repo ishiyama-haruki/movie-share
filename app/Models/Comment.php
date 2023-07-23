@@ -22,7 +22,8 @@ class Comment extends Model
     protected $fillable = [
         'user_id',
         'movie_history_id',
-        'message'
+        'message',
+        'is_read'
     ];
 
     protected $guarded = ['created_at', 'updated_at'];

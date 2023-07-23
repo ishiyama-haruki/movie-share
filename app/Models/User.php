@@ -19,6 +19,18 @@ class User extends Authenticatable
         return $this->hasMany(MovieHistory::class);
     }
 
+    public function getNonreadCommentCountsAttribute()
+    {
+        $movieHistories = $this->movieHistories()->get();
+
+        $count = 0;
+        foreach ($movieHistories as $movieHistory) {
+            $count += $movieHistory->comments()->where('user_id', '!=', $this->id)->where('is_read', 0)->count();
+        }
+
+        return $count;
+    }
+
     /**
      * The attributes that are mass assignable.
      *
