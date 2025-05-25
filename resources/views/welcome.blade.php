@@ -40,9 +40,6 @@
             <div style="display: flex; justify-content: center; align-items: center;">
                 <div style="width: 100%; text-align: center;">
                     <img src="{{ asset('img/movie_share_logo.png') }}" alt=""  style="height: auto; width: 70%; object-fit: contain;">
-                    <span style="display: block; width: 100%;">
-                        何か不具合がありましたらapplication1212office@gmail.comまで<br>ご連絡よろしくお願いいたします。
-                    </span>
                 </div>
             </div>
         </div>
