@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
     @if (!$search)
-        <h3 class="text-center md:text-3xl text-2xl font-extrabold mt-5 md:mt-10 mb-3">現在の登録動画数：{{ $movies->total() }}</h3>
+        <h3 class="text-center md:text-3xl text-2xl font-extrabold mt-5 md:mt-10 mb-3">現在の登録映画数：{{ $movies->total() }}</h3>
         <div class="md:w-1/2 mx-auto bg-white">
             <x-index-chart />
         </div>
